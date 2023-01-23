@@ -48,7 +48,7 @@ void onMqttConnect(bool sessionPresent) {
   Serial.print("Session present: ");
   Serial.println(sessionPresent);
 
-  MqttPublish("Connecting on WeMOS", GeneralTopic);
+  // MqttPublish("Connecting on WeMOS", GeneralTopic);
   Serial.println("Test Publishing at QoS 0");
 }
 
@@ -96,11 +96,11 @@ void loopButton() {
   if (curButtonState != prevButtonState) {
     if (curButtonState == HIGH) {
       Serial.println("Button: just released");
-      MqttPublish("Button: just released", ButtonTopic);
+      // MqttPublish("Button: just released", ButtonTopic);
       digitalWrite(LED_BLUE_PIN, LOW);
     } else {
       Serial.println("Button: just pressed");
-      MqttPublish("Button: just pressed", ButtonTopic);
+      // MqttPublish("Button: just pressed", ButtonTopic);
       digitalWrite(LED_BLUE_PIN, HIGH);
     }
   }
@@ -188,12 +188,13 @@ inline void initLEDs() {
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
+      Serial.println("WAITING");
   }
-
+Serial.println("DONE");
   initLEDs();
   initButton();
   initWifi();
-  initMqtt();
+  // initMqtt();
 
   Serial.println("Setup done");
 }
